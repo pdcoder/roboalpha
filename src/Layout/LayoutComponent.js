@@ -1,10 +1,11 @@
 import { Layout, Menu, Icon, Carousel } from 'antd';
 import './LayoutComponent.css';
+import SignupWrapped from '../Signup/Signup';
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link,Route, withRouter, Switch,Router} from 'react-router-dom';
 import Landing from '../Landing/Landing';
+import Terms from '../Terms/Terms';
 const { Header, Content, Footer, Sider } = Layout;
-
 class LayoutComponent extends Component{
 constructor(){
   super();
@@ -69,12 +70,13 @@ render(){
         style={{ lineHeight: '64px' }}
       >
         <Menu.Item key="1"><Link to="/signin">Sign In</Link></Menu.Item>
-        <Menu.Item key="2"><Link to="/signin">Sign Up</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="/signup">Sign Up</Link></Menu.Item>
         <Menu.Item key="3">nav 3</Menu.Item>
       </Menu>
     </Header> 
-     
-      <Landing/>
+     <Route path="/terms" component={Terms} />
+     <Route path="/signup" exact component={SignupWrapped} />
+     <Route path="/" exact component={Landing} />
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED
       </Footer>
