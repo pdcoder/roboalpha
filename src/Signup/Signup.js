@@ -89,16 +89,12 @@ class Signup extends Component {
       </Select>
     );
 
-    const websiteOptions = autoCompleteResult.map(website => (
-      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    ));
-
     return (
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
         <div style={{ marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
 
 <h1>Join Us</h1>
-      <Form onSubmit={this.handleSubmit}>
+      <Form style={{margin: '0 auto'}} onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
           label="E-mail"
@@ -158,17 +154,7 @@ class Signup extends Component {
             <Input />
           )}
         </FormItem>
-        
-        <FormItem
-          {...formItemLayout}
-          label="Phone Number"
-        >
-          {getFieldDecorator('phone', {
-            rules: [{ required: true, message: 'Please input your phone number!' }],
-          })(
-            <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-          )}
-        </FormItem>
+       
         <FormItem {...tailFormItemLayout}>
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
@@ -178,6 +164,7 @@ class Signup extends Component {
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">Register</Button>
+          <br />Already have an <Link to="/signin"> account!</Link>
         </FormItem>
       </Form>
       </div>

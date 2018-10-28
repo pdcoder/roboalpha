@@ -1,10 +1,14 @@
 import { Layout, Menu, Icon, Carousel } from 'antd';
 import './LayoutComponent.css';
 import SignupWrapped from '../Signup/Signup';
+import SigninWrapped from '../Login/Signin';
 import React, { Component } from 'react';
 import { Link,Route, withRouter, Switch,Router} from 'react-router-dom';
 import Landing from '../Landing/Landing';
 import Terms from '../Terms/Terms';
+import Faq from '../Faq/Faq';
+import Contact from '../Contact/Contact';
+
 const { Header, Content, Footer, Sider } = Layout;
 class LayoutComponent extends Component{
 constructor(){
@@ -14,15 +18,16 @@ constructor(){
   };
 }
 
-toggle = () => {
-  this.setState({
-    collapsed: !this.state.collapsed,
-  });
+onCollapse = (collapsed) => {
+  this.setState({ collapsed });
 }
 render(){
   return(
-  <Layout> 
-    <Sider  style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}>
+  <Layout style={{height: '100vh'}}> 
+    <Sider  style={{ overflow: 'auto', left: 0 }}
+    collapsible
+    collapsed={this.state.collapsed}
+    onCollapse={this.onCollapse} >
       <div className="logo" />
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
         <Menu.Item key="1">
@@ -60,21 +65,27 @@ render(){
       </Menu>
     </Sider>
     
-    <Layout style={{ marginLeft: 200 }}>
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-      <div className="logo" />
+    <Layout>
+    <Header style={{ overflow: 'auto',position: 'fixed',width: '100%', padding:'0' }}>
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['2']}
+        defaultSelectedKeys={['1']}
         style={{ lineHeight: '64px' }}
       >
-        <Menu.Item key="1"><Link to="/signin">Sign In</Link></Menu.Item>
-        <Menu.Item key="2"><Link to="/signup">Sign Up</Link></Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
+        <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="/signin">Sign In</Link></Menu.Item>
+        <Menu.Item key="3"><Link to="/signup">Sign Up</Link></Menu.Item>
+        <Menu.Item key="4"><Link to="/terms">Privacy Policy</Link></Menu.Item>
+        <Menu.Item key="5"><Link to="/contact">Contact Us</Link></Menu.Item>
+        <Menu.Item key="6"><Link to="/faq">Frequently asked Questionss</Link></Menu.Item>
+
       </Menu>
     </Header> 
+     <Route path="/faq" component={Faq} />
+     <Route path="/contact" component={Contact} />
      <Route path="/terms" component={Terms} />
+     <Route path="/signin" exact component={SigninWrapped} />
      <Route path="/signup" exact component={SignupWrapped} />
      <Route path="/" exact component={Landing} />
       <Footer style={{ textAlign: 'center' }}>
