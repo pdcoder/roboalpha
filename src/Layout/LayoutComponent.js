@@ -6,79 +6,67 @@ import React, { Component } from 'react';
 import { Link,Route, withRouter, Switch,Router} from 'react-router-dom';
 import Landing from '../Landing/Landing';
 import Terms from '../Terms/Terms';
+import Profile from '../Profile/Profile';
+import Opportunity from '../Opportunity/Opportunity';
+import Dashboard from '../Dashboard/Dashboard';
 import Faq from '../Faq/Faq';
 import Contact from '../Contact/Contact';
-
+import PrivateRoute from '../PrivateRoute';
 const { Header, Content, Footer, Sider } = Layout;
 class LayoutComponent extends Component{
-constructor(){
-  super();
+constructor(props){
+  super(props);
   this.state = {
     collapsed: false,
+    auth: true
   };
 }
-
+componentDidMount(){
+  const {pathname} = this.props.location;
+  console.log(pathname);
+}
 onCollapse = (collapsed) => {
   this.setState({ collapsed });
 }
 render(){
+  
   return(
   <Layout style={{height: '100vh'}}> 
-    <Sider  style={{ overflow: 'auto', left: 0 }}
+   { this.state.auth ?  <Sider  style={{ overflow: 'auto', left: 0 }}
+    breakpoint="sm"
+    collapsedWidth="70"
     collapsible
     collapsed={this.state.collapsed}
     onCollapse={this.onCollapse} >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-        <Menu.Item key="1">
+      <Menu  theme="dark" mode="inline">
+        <Menu.Item style={{marginTop: '0'}} key="1"><Link to="/profile">
           <Icon type="user" />
-          <span className="nav-text">nav 1</span>
+          <span className="nav-text">Profile</span></Link>
         </Menu.Item>
-        <Menu.Item key="2">
-          <Icon type="video-camera" />
-          <span className="nav-text">nav 2</span>
+        <Menu.Item key="2"><Link to="/dashboard">
+          <Icon type="dashboard" />
+          <span className="nav-text">Dashboard</span></Link>
         </Menu.Item>
-        <Menu.Item key="3">
-          <Icon type="upload" />
-          <span className="nav-text">nav 3</span>
-        </Menu.Item>
-        <Menu.Item key="4">
-          <Icon type="bar-chart" />
-          <span className="nav-text">nav 4</span>
-        </Menu.Item>
-        <Menu.Item key="5">
-          <Icon type="cloud-o" />
-          <span className="nav-text">nav 5</span>
-        </Menu.Item>
-        <Menu.Item key="6">
-          <Icon type="appstore-o" />
-          <span className="nav-text">nav 6</span>
-        </Menu.Item>
-        <Menu.Item key="7">
-          <Icon type="team" />
-          <span className="nav-text">nav 7</span>
-        </Menu.Item>
-        <Menu.Item key="8">
-          <Icon type="shop" />
-          <span className="nav-text">nav 8</span>
+        <Menu.Item key="3"><Link to="/opportunity">
+          <Icon type="smile" />
+          <span className="nav-text">Opportunities</span></Link>
         </Menu.Item>
       </Menu>
     </Sider>
-    
+    : null}
     <Layout>
-    <Header style={{ overflow: 'auto',position: 'fixed',width: '100%', padding:'0' }}>
-      <Menu
+    <Header collapsible style={{ overflow: 'auto',position: 'fixed',width: '100%', padding:'0' }}>
+      <Menu 
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['1']}
         style={{ lineHeight: '64px' }}
       >
         <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
         <Menu.Item key="2"><Link to="/signin">Sign In</Link></Menu.Item>
-        <Menu.Item key="3"><Link to="/signup">Sign Up</Link></Menu.Item>
-        <Menu.Item key="4"><Link to="/terms">Privacy Policy</Link></Menu.Item>
-        <Menu.Item key="5"><Link to="/contact">Contact Us</Link></Menu.Item>
-        <Menu.Item key="6"><Link to="/faq">Frequently asked Questionss</Link></Menu.Item>
+        <Menu.Item key="3"><Link to="/contact">Contact</Link></Menu.Item>
+        <Menu.Item key="4"><Link to="/faq">FAQ</Link></Menu.Item>
+        <Menu.Item key="5"><Link to="/terms">Privacy Policy</Link></Menu.Item>
 
       </Menu>
     </Header> 
@@ -87,7 +75,15 @@ render(){
      <Route path="/terms" component={Terms} />
      <Route path="/signin" exact component={SigninWrapped} />
      <Route path="/signup" exact component={SignupWrapped} />
+     <PrivateRoute auth={this.state.auth} path="/profile" component={Profile} />
+     <PrivateRoute auth={this.state.auth} path="/dashboard" component={Dashboard} />
+     <PrivateRoute auth={this.state.auth} path="/opportunity" component={Opportunity} />
      <Route path="/" exact component={Landing} />
+     
+
+
+
+
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED
       </Footer>
@@ -97,4 +93,4 @@ render(){
 }
 }
 
-export default LayoutComponent;
+export default withRouter(LayoutComponent);

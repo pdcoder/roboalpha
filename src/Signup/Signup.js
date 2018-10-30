@@ -1,6 +1,7 @@
-import { Layout,Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Layout,Form, Input, Breadcrumb, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './Signup.css';
 const { Header, Content, Footer, Sider } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -91,8 +92,16 @@ class Signup extends Component {
 
     return (
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-        <div style={{ marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
-
+        <div style={{ height: '100vh',marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
+        <Breadcrumb style={{textAlign:'left'}}>
+        <Breadcrumb.Item>
+      <Link to="/"><Icon type="home" /></Link>
+    </Breadcrumb.Item>
+    <Breadcrumb.Item href="">
+    <Link to="/signup"><Icon type="user-add"/></Link>
+      &nbsp;<span>Sign up</span>
+    </Breadcrumb.Item>
+  </Breadcrumb>
 <h1>Join Us</h1>
       <Form style={{margin: '0 auto'}} onSubmit={this.handleSubmit}>
         <FormItem
@@ -137,24 +146,6 @@ class Signup extends Component {
             <Input type="password" onBlur={this.handleConfirmBlur} />
           )}
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label={(
-            <span>
-              Nickname&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}
-        >
-          {getFieldDecorator('nickname', {
-            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-       
         <FormItem {...tailFormItemLayout}>
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',

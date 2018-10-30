@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { Collapse, Breadcrumb,Icon,Layout,Form, Input, Tooltip,  Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -12,39 +13,41 @@ const faq = () => {
         marginBottom: 24,
         border: 0,
         overflow: 'hidden',
+        textAlign: 'left'
       };
 
       let text = "This is the answer to all the questions";
 
-    return(
-        <div>
-        <Breadcrumb>
-    <Breadcrumb.Item href="">
-      <Icon type="home" />
+    return( 
+       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+        <div style={{ height: '100vh',marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
+        <Breadcrumb style={{textAlign:'left'}}>
+        <Breadcrumb.Item>
+      <Link to="/"><Icon type="home" /></Link>
     </Breadcrumb.Item>
-    <Breadcrumb.Item href="">
-      <Icon type="user" />
-      <span>Faq</span>
+    <Breadcrumb.Item >
+    <Link to="/faq"><Icon type="form"/></Link>
+      &nbsp;<span>FAQ</span>
     </Breadcrumb.Item>
   </Breadcrumb>
-        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-        <div style={{ marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
+
+
         <h1>Frequently Asked Questions</h1>
-        <span style={{textAlign: 'centre'}}><Icon type="question" theme="outlined" /></span>
-        <Collapse bordered={false} defaultActiveKey={['1']}>
-    <Panel header="This is panel header 1" key="1" style={customPanelStyle}>
+        <span style={{textAlign: 'centre'}}></span>
+        <Collapse bordered={false}>
+    <Panel header="What is your question?" key="1" style={customPanelStyle}>
       <p>{text}</p>
     </Panel>
-    <Panel header="This is panel header 2" key="2" style={customPanelStyle}>
+    <Panel header="What is your question?" key="2" style={customPanelStyle}>
       <p>{text}</p>
     </Panel>
-    <Panel header="This is panel header 3" key="3" style={customPanelStyle}>
+    <Panel header="What is your question?" key="3" style={customPanelStyle}>
       <p>{text}</p>
     </Panel>
   </Collapse>
         </div>
         </Content>
-        </div>
+        
     )
 }
 

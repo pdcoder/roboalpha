@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Breadcrumb,Layout, Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Link } from 'react-router-dom';
+import './Signin.css';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 const FormItem = Form.Item;
@@ -19,8 +21,16 @@ class Signin extends Component{
     const { getFieldDecorator } = this.props.form;
     return (
         <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-        <div style={{ marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
-
+        <div style={{height: '100vh', marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
+        <Breadcrumb style={{textAlign:'left'}}>
+        <Breadcrumb.Item>
+      <Link to="/"><Icon type="home" /></Link>
+    </Breadcrumb.Item>
+    <Breadcrumb.Item href="">
+    <Link to="/signin"><Icon type="user"/></Link>
+      &nbsp;<span>Sign in</span>
+    </Breadcrumb.Item>
+  </Breadcrumb>
 <h1>Sign In</h1>
       <Form onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
@@ -45,12 +55,11 @@ class Signin extends Component{
             <Checkbox>Remember me</Checkbox>
           )}
           <br />
-            <a className="login-form-forgot" href="">Forgot password</a>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
           <br />
-          Or <Link to="/signup">register now!</Link>
+          Or <Link to="/signup">Register now!</Link>
         </FormItem>
       </Form>
       </div>
