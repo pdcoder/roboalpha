@@ -1,8 +1,8 @@
-import { Layout,Form, Input, Breadcrumb, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Layout, Form, Input, Breadcrumb, Icon,  Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Signup.css';
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -92,77 +92,77 @@ class Signup extends Component {
 
     return (
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-        <div style={{ height: '100vh',marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
-        <Breadcrumb style={{textAlign:'left'}}>
-        <Breadcrumb.Item>
-      <Link to="/"><Icon type="home" /></Link>
-    </Breadcrumb.Item>
-    <Breadcrumb.Item href="">
-    <Link to="/signup"><Icon type="user-add"/></Link>
-      &nbsp;<span>Sign up</span>
-    </Breadcrumb.Item>
-  </Breadcrumb>
-<h1>Join Us</h1>
-      <Form style={{margin: '0 auto'}} onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="E-mail"
-        >
-          {getFieldDecorator('email', {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: true, message: 'Please input your E-mail!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Password"
-        >
-          {getFieldDecorator('password', {
-            rules: [{
-              required: true, message: 'Please input your password!',
-            }, {
-              validator: this.validateToNextPassword,
-            }],
-          })(
-            <Input type="password" />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Confirm Password"
-        >
-          {getFieldDecorator('confirm', {
-            rules: [{
-              required: true, message: 'Please confirm your password!',
-            }, {
-              validator: this.compareToFirstPassword,
-            }],
-          })(
-            <Input type="password" onBlur={this.handleConfirmBlur} />
-          )}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>I have read the <Link to="/terms">agreement</Link></Checkbox>
-          )}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Register</Button>
-          <br />Already have an <Link to="/signin"> account!</Link>
-        </FormItem>
-      </Form>
-      </div>
+        <div style={{ height: '100vh', marginTop: 65, padding: 24, background: '#fff', textAlign: 'center' }}>
+          <Breadcrumb style={{ textAlign: 'left' }}>
+            <Breadcrumb.Item>
+              <Link to="/"><Icon type="home" /></Link>
+            </Breadcrumb.Item>
+            <Breadcrumb.Item href="">
+              <Link to="/signup"><Icon type="user-add" /></Link>
+              &nbsp;<span>Sign up</span>
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <h1>Join Us</h1>
+          <Form style={{ margin: '0 auto' }} onSubmit={this.handleSubmit}>
+            <FormItem
+              {...formItemLayout}
+              label="E-mail"
+            >
+              {getFieldDecorator('email', {
+                rules: [{
+                  type: 'email', message: 'The input is not valid E-mail!',
+                }, {
+                  required: true, message: 'Please input your E-mail!',
+                }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Password"
+            >
+              {getFieldDecorator('password', {
+                rules: [{
+                  required: true, message: 'Please input your password!',
+                }, {
+                  validator: this.validateToNextPassword,
+                }],
+              })(
+                <Input type="password" />
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Confirm Password"
+            >
+              {getFieldDecorator('confirm', {
+                rules: [{
+                  required: true, message: 'Please confirm your password!',
+                }, {
+                  validator: this.compareToFirstPassword,
+                }],
+              })(
+                <Input type="password" onBlur={this.handleConfirmBlur} />
+              )}
+            </FormItem>
+            <FormItem {...tailFormItemLayout}>
+              {getFieldDecorator('agreement', {
+                valuePropName: 'checked',
+              })(
+                <Checkbox>I have read the <Link to="/terms">agreement</Link></Checkbox>
+              )}
+            </FormItem>
+            <FormItem {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit">Register</Button>
+              <br />Already have an <Link to="/signin"> account!</Link>
+            </FormItem>
+          </Form>
+        </div>
       </Content>
     );
   }
-  
+
 }
 const SignupWrapped = Form.create()(Signup);
 

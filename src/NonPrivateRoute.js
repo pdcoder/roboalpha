@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, auth, ...rest }) => (
+const NonPrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      auth === true ? (
+      auth === false ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/sighin" />
+        <Redirect to="/" />
       )
     }
   />
@@ -16,4 +16,4 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 
 
 
-export default PrivateRoute;
+export default NonPrivateRoute;
